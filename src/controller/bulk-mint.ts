@@ -52,16 +52,16 @@ const waitForTransaction = async (promise: Promise<string>) => {
   return receipt;
 };
 
-const reward = async (walletAddress: any, count: number, tokenID: number) => {
+export const reward = async (req: any, res: any) => {
   const BULK_MINT_MAX = env.bulkMintMax;
 
-  const wallet =  walletAddress
-  const number =  count
+  const wallet =  req.body.walletAddress
+  const number =  req.body.count
 
   if (number >= Number(BULK_MINT_MAX))
     throw new Error(`tried to mint too many tokens. Maximum ${BULK_MINT_MAX}`);
 
-  const tokenId = tokenID
+  const tokenId = req.body.tokenID
 
   const minter = await ImmutableXClient.build({
     ...env.client,
@@ -102,5 +102,7 @@ const reward = async (walletAddress: any, count: number, tokenID: number) => {
 
   const result = await minter.mintV2(payload);
   console.log(result);
+
+  res.send({ success: result })
 }
   
