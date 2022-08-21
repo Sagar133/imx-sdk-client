@@ -6,10 +6,13 @@ import { parse } from 'ts-command-line-args';
 
 import { loggerConfig } from './config/logging';
 import { getEnv } from './libs/utils';
+import fs from "fs"
 
 let env = {
   alchemyApiKey: getEnv('ALCHEMY_API_KEY'),
   ethNetwork: getEnv('ETH_NETWORK'),
+  pinataKey: getEnv('PINATA_APIKEY'),
+  pinataSecret: getEnv('PINATA_SECRET'),
   client: {
     publicApiUrl: getEnv('PUBLIC_API_URL'),
     starkContractAddress: getEnv('STARK_CONTRACT_ADDRESS'),
@@ -26,6 +29,22 @@ let env = {
   ownerAccountPrivateKey: getEnv('OWNER_ACCOUNT_PRIVATE_KEY'),
   collectionContractAddress: getEnv('COLLECTION_CONTRACT_ADDRESS'),
   collectionProjectId: getEnv('COLLECTION_PROJECT_ID'),
+}
+
+const prevTokenID = require('./tokenID.json')
+
+const previousTokenID = () => {
+  return prevTokenID.tokenID
+}
+
+const updateTokenID = (number: number) => {
+  let tokensCount = previousTokenID() + number
+  fs.writeFile('./src/controller/tokenID.json', JSON.stringify({ "tokenID": tokensCount }), (err) => {
+    if (err) {
+        throw err;
+    }
+    console.log("JSON data is saved.");
+  });
 }
 
 interface BulkMintScriptArgs {
@@ -61,7 +80,7 @@ export const reward = async (req: any, res: any) => {
   if (number >= Number(BULK_MINT_MAX))
     throw new Error(`tried to mint too many tokens. Maximum ${BULK_MINT_MAX}`);
 
-  const tokenId = req.body.tokenID
+  const tokenId = previousTokenID()
 
   const minter = await ImmutableXClient.build({
     ...env.client,
@@ -101,7 +120,7 @@ export const reward = async (req: any, res: any) => {
   ];
 
   const result = await minter.mintV2(payload);
-  console.log(result);
+  updateTokenID(number)
 
   res.send({ success: result })
 }

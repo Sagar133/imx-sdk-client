@@ -3,6 +3,8 @@ import { getEnv } from '../libs/utils';
 export default {
   alchemyApiKey: getEnv('ALCHEMY_API_KEY'),
   ethNetwork: getEnv('ETH_NETWORK'),
+  pinataKey: getEnv('PINATA_APIKEY'),
+  pinataSecret: getEnv('PINATA_SECRET'),
   client: {
     publicApiUrl: getEnv('PUBLIC_API_URL'),
     starkContractAddress: getEnv('STARK_CONTRACT_ADDRESS'),
