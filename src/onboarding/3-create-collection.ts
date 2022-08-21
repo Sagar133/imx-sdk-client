@@ -35,13 +35,13 @@ const component = '[IMX-CREATE-COLLECTION]';
    * Edit your values here
    */
   const params: CreateCollectionParams = {
-    name: 'ENTER_COLLECTION_NAME',
-    // description: 'ENTER_COLLECTION_DESCRIPTION (OPTIONAL)',
+    name: 'Hobbits',
+    description: 'Middle Earth Game',
     contract_address: collectionContractAddress,
     owner_public_key: ownerPublicKey,
-    // icon_url: '',
-    // metadata_api_url: '',
-    // collection_image_url: '',
+    icon_url: 'https://gateway.pinata.cloud/ipfs/QmYmK2fQ3WVNwZGLDTJuAyQdZCwy4ByC3qJVq42WyDzUnB',
+    metadata_api_url: 'https://gateway.pinata.cloud/ipfs/QmQRRPF5hWfvLEr8oZPV6QLYvXDu4tQEYJEy86qKQjNDGf',
+    collection_image_url: 'https://gateway.pinata.cloud/ipfs/QmYmK2fQ3WVNwZGLDTJuAyQdZCwy4ByC3qJVq42WyDzUnB',
     project_id: parseInt(projectId, 10),
   };
 
