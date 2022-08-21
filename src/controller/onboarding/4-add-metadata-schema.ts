@@ -6,7 +6,7 @@ import {
   ImmutableXClient,
   MetadataTypes,
 } from '@imtbl/imx-sdk';
-import { requireEnvironmentVariable } from 'libs/utils';
+import { requireEnvironmentVariable } from '../libs/utils';
 
 import env from '../config/client';
 import { loggerConfig } from '../config/logging';
