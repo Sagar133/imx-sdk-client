@@ -5,7 +5,7 @@ import {
   ImmutableXClient,
   UpdateMetadataSchemaByNameParams,
 } from '@imtbl/imx-sdk';
-import { requireEnvironmentVariable } from 'libs/utils';
+import { requireEnvironmentVariable } from '../libs/utils';
 import { parse } from 'ts-command-line-args';
 
 import env from '../config/client';

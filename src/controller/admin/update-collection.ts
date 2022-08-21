@@ -2,7 +2,7 @@ import { AlchemyProvider } from '@ethersproject/providers';
 import { Wallet } from '@ethersproject/wallet';
 import { ImLogger, WinstonLogger } from '@imtbl/imlogging';
 import { ImmutableXClient, UpdateCollectionParams } from '@imtbl/imx-sdk';
-import { requireEnvironmentVariable } from 'libs/utils';
+import { requireEnvironmentVariable } from '../libs/utils';
 
 import env from '../config/client';
 import { loggerConfig } from '../config/logging';

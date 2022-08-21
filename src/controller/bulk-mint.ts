@@ -4,8 +4,8 @@ import { ImLogger, WinstonLogger } from '@imtbl/imlogging';
 import { ImmutableXClient, ImmutableMethodParams } from '@imtbl/imx-sdk';
 import { parse } from 'ts-command-line-args';
 
-import { loggerConfig } from './controller/config/logging';
-import { getEnv } from './controller/libs/utils';
+import { loggerConfig } from './config/logging';
+import { getEnv } from './libs/utils';
 
 let env = {
   alchemyApiKey: getEnv('ALCHEMY_API_KEY'),

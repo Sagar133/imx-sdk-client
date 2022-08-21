@@ -1,6 +1,6 @@
 import { ImLogger, WinstonLogger } from '@imtbl/imlogging';
 import { ImmutableMethodParams, ImmutableXClient } from '@imtbl/imx-sdk';
-import { requireEnvironmentVariable } from 'libs/utils';
+import { requireEnvironmentVariable } from '../libs/utils';
 
 import env from '../config/client';
 import { loggerConfig } from '../config/logging';

@@ -2,7 +2,7 @@ import { AlchemyProvider } from '@ethersproject/providers';
 import { Wallet } from '@ethersproject/wallet';
 import { ImLogger, WinstonLogger } from '@imtbl/imlogging';
 import { ImmutableXClient } from '@imtbl/imx-sdk';
-import { requireEnvironmentVariable } from 'libs/utils';
+import { requireEnvironmentVariable } from '../libs/utils';
 import { parse } from 'ts-command-line-args';
 
 import env from '../config/client';
@@ -21,13 +21,15 @@ interface GetProjectArguments {
   const privateKey = requireEnvironmentVariable('OWNER_ACCOUNT_PRIVATE_KEY');
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { project_id } = parse<GetProjectArguments>({
-    project_id: {
-      type: Number,
-      alias: 'i',
-      description: 'The ID of the project',
-    },
-  });
+  // const { project_id } = parse<GetProjectArguments>({
+  //   project_id: {
+  //     type: Number,
+  //     alias: 'i',
+  //     description: 'The ID of the project',
+  //   },
+  // });
+
+  const project_id = 80913
 
   const signer = new Wallet(privateKey).connect(provider);
 
