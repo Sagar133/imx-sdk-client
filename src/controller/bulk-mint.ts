@@ -31,13 +31,15 @@ let env = {
   collectionProjectId: getEnv('COLLECTION_PROJECT_ID'),
 }
 
-const prevTokenID = require('./tokenID.json')
 
 const previousTokenID = () => {
-  return prevTokenID.tokenID
+  let data = JSON.parse(fs.readFileSync('./src/controller/tokenID.json',
+  {encoding:'utf8', flag:'r'}))
+  
+  return data.tokenID
 }
 
-const updateTokenID = (number: number) => {
+const updateTokenID = async (number: number) => {
   let tokensCount = previousTokenID() + number
   fs.writeFile('./src/controller/tokenID.json', JSON.stringify({ "tokenID": tokensCount }), (err) => {
     if (err) {
@@ -80,7 +82,9 @@ export const reward = async (req: any, res: any) => {
   if (number >= Number(BULK_MINT_MAX))
     throw new Error(`tried to mint too many tokens. Maximum ${BULK_MINT_MAX}`);
 
-  const tokenId = previousTokenID()
+  let tokenId = await previousTokenID()
+  console.log("tokenId", tokenId);
+  
 
   const minter = await ImmutableXClient.build({
     ...env.client,
@@ -120,7 +124,7 @@ export const reward = async (req: any, res: any) => {
   ];
 
   const result = await minter.mintV2(payload);
-  updateTokenID(number)
+  await updateTokenID(number)
 
   res.send({ success: result })
 }
